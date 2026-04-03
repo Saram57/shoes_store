@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(12px);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --text-color: #fff;
+        }
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: var(--glass-border);
+            padding: 15px 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--text-color) !important;
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 400;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #fff !important;
+            opacity: 1;
+        }
+        .btn-login-nav {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: #fff;
+            border-radius: 4px;
+            padding: 7px 25px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-login-nav:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .page-subtitle {
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 60px;
+        }
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .img-container {
+            background: #fff;
+            height: 350px;
+            overflow: hidden;
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        .product-details {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1;
+        }
+        .category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            display: block;
+        }
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .price {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        .btn-add {
+            background-color: #332d29;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-add:hover {
+            background-color: #4a423d;
+            color: #fff;
+        }
+        .footer-glass {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 0 20px;
+            margin-top: 50px;
+            margin-bottom: -50px;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-heading {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-link, .footer-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .footer-link:hover {
+            color: #fff;
+        }
+        .social-icons a {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 15px;
+            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            color: #fff;
+        }
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        @media (max-width: 768px) {
+            .img-container { height: 280px; }
+            .page-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-glass">
+        <div class="container">
+            <a class="navbar-brand" href="#">Shoes store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./product.html">Products</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="./cart.html">
+                            Cart
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3"><a href="./loginpage.html" class="btn btn-login-nav">LOGIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center">
+        <h1 class="page-title">Our Collection</h1>
+        <p class="page-subtitle">Find your perfect pair</p>
+
+        <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Classic Nude Pumps</h2>
+                        <p class="price">$89.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Classic Nude Pumps', 89.99, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500" alt="Sneakers">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Sneakers</span>
+                        <h2 class="product-name">Everyday White Sneakers</h2>
+                        <p class="price">$64.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Everyday White Sneakers', 64.99, 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Classic Nude Pumps</h2>
+                        <p class="price">$89.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Classic Nude Pumps', 89.99, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Black Kitten Heels</h2>
+                        <p class="price">$74.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Black Kitten Heels', 74.99, 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Classic Nude Pumps</h2>
+                        <p class="price">$89.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Classic Nude Pumps', 89.99, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500" alt="Sneakers">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Sneakers</span>
+                        <h2 class="product-name">Everyday White Sneakers</h2>
+                        <p class="price">$64.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Everyday White Sneakers', 64.99, 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Classic Nude Pumps</h2>
+                        <p class="price">$89.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Classic Nude Pumps', 89.99, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" alt="Heels">
+                    </div>
+                    <div class="product-details">
+                        <span class="category">Heels</span>
+                        <h2 class="product-name">Black Kitten Heels</h2>
+                        <p class="price">$74.99</p>
+                        <button class="btn btn-add" onclick="addToCart('Black Kitten Heels', 74.99, 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500')">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-glass">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <div class="footer-logo">Shoes store</div>
+                    <p class="footer-text">Elegant footwear for every occasion. Handcrafted with care and designed for comfort.</p>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <h5 class="footer-heading">Contact</h5>
+                    <a href="mailto:hello@shoes.com" class="footer-link">hello@shoes.com</a>
+                    <p class="footer-text">+1 (555) 234-5678</p>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <h5 class="footer-heading">Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p>© 2026 Shoes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script></script>
+
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('luna_cart')) || [];
+            
+            let existingProduct = cart.find(item => item.name === name);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            
+            localStorage.setItem('luna_cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(name + " added to cart!");
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('luna_cart')) || [];
+            let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            let badge = document.getElementById('cart-count');
+            if(badge) {
+                if(count > 0) {
+                    badge.style.display = 'inline-block';
+                    badge.innerText = count;
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>
